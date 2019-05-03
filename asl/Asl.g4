@@ -38,7 +38,15 @@ program : function+ EOF
 
 // A function has a name, a list of parameters and a list of statements
 function
-        : FUNC ID '(' ')' declarations statements ENDFUNC
+        : FUNC ID '(' (parameters | ) ')' ( | (':' type)) declarations statements ENDFUNC
+        ;
+        
+parameters
+        : parameter (',' parameter)*
+        ;
+        
+parameter
+        : ID ':' data
         ;
 
 declarations
@@ -46,10 +54,17 @@ declarations
         ;
 
 variable_decl
-        : VAR ID ':' type
+        : VAR ID (',' ID)* ':' data
         ;
+        
+data
+        : type
+        : ARRAY '[' INTVAL ']' 'of' type
 
 type    : INT
+        : FLOAT
+        : BOOL
+        : CHAR
         ;
 
 statements
@@ -59,9 +74,11 @@ statements
 // The different types of instructions
 statement
           // Assignment
-        : left_expr ASSIGN expr ';'           # assignStmt
+        : left_expr ASSIGN expr ';'                    # assignStmt
           // if-then-else statement (else is optional)
-        | IF expr THEN statements ENDIF       # ifStmt
+        | IF expr THEN statements (elseStmt| ) ENDIF   # ifStmt
+          // while statement
+        | WHILE expr DO statements ENDWHILE            # whileStmt
           // A function/procedure call has a list of arguments in parenthesis (possibly empty)
         | ident '(' ')' ';'                   # procCall
           // Read a variable
@@ -70,18 +87,29 @@ statement
         | WRITE expr ';'                      # writeExpr
           // Write a string
         | WRITE STRING ';'                    # writeString
+          //
+        | RETURN (expr | )                    # returnStmt
         ;
+
+elseStmt
+        : ELSE statement
+        
 // Grammar for left expressions (l-values in C++)
 left_expr
         : ident
         ;
 
 // Grammar for expressions with boolean, relational and aritmetic operators
-expr    : expr op=MUL expr                    # arithmetic
-        | expr op=PLUS expr                   # arithmetic
-        | expr op=EQUAL expr                  # relational
-        | INTVAL                              # value
-        | ident                               # exprIdent
+expr    : ident '[' expr ']'                             # corchete
+        | op=(NOT|PLUS|MINUS) expr                       # unary
+        | expr op=(MUL|DIV) expr                         # arithmetic
+        | expr op=(PLUS|MINUS|MOD) expr                  # arithmetic
+        | expr op=(EQUAL|NEQUAL|LT|GT|LE|GE) expr        # relational
+        | expr op=AND                                    # logical
+        | expr op=OR                                     # logical
+        | '(' expr ')'                                   # parenthesis
+        | (INTVAL|FLOATVAL|TRUE|FALSE|CHARVAL)           # value
+        | ident                                          # exprIdent
         ;
 
 ident   : ID
@@ -92,21 +120,44 @@ ident   : ID
 //////////////////////////////////////////////////
 
 ASSIGN    : '=' ;
+NOT       : 'not'
+AND       : 'and'
+OR        : 'or'
 EQUAL     : '==' ;
+NEQUAL    : '!='
+LT        : '<';
+GT        : '>';
+LE        : '<=';
+GE        : '>=';
 PLUS      : '+' ;
 MUL       : '*';
+DIV       : '/';
+MOD       : '%'
+MINUS     : '-';
 VAR       : 'var';
+ARRAY     : 'array';
 INT       : 'int';
+FLOAT     : 'float';
+BOOL      : 'bool';
+CHAR      : 'char';
 IF        : 'if' ;
 THEN      : 'then' ;
 ELSE      : 'else' ;
 ENDIF     : 'endif' ;
+WHILE     : 'while'
+DO        : 'do'
+ENDWHILE  : 'endwhile'
 FUNC      : 'func' ;
 ENDFUNC   : 'endfunc' ;
+RETURN    : 'return'
 READ      : 'read' ;
 WRITE     : 'write' ;
 ID        : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ;
 INTVAL    : ('0'..'9')+ ;
+FLOATVAL  : ('0'..'9')+ '.' ('0'..'9')+
+TRUE      : 'true'
+FALSE     : 'false'
+CHARVAL   : '\'' . '\''
 
 // Strings (in quotes) with escape sequences
 STRING    : '"' ( ESC_SEQ | ~('\\'|'"') )* '"' ;
