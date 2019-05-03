@@ -92,7 +92,7 @@ statement
         ;
 
 elseStmt
-        : ELSE statement
+        : ELSE statements
         
 // Grammar for left expressions (l-values in C++)
 left_expr
@@ -102,8 +102,8 @@ left_expr
 // Grammar for expressions with boolean, relational and aritmetic operators
 expr    : ident '[' expr ']'                             # corchete
         | op=(NOT|PLUS|MINUS) expr                       # unary
-        | expr op=(MUL|DIV) expr                         # arithmetic
-        | expr op=(PLUS|MINUS|MOD) expr                  # arithmetic
+        | expr op=(MUL|DIV|MOD) expr                     # arithmetic
+        | expr op=(PLUS|MINUS) expr                      # arithmetic
         | expr op=(EQUAL|NEQUAL|LT|GT|LE|GE) expr        # relational
         | expr op=AND                                    # logical
         | expr op=OR                                     # logical
