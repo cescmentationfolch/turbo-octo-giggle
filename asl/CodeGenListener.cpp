@@ -94,10 +94,11 @@ void CodeGenListener::enterVariable_decl(AslParser::Variable_declContext *ctx) {
   DEBUG_ENTER();
 }
 void CodeGenListener::exitVariable_decl(AslParser::Variable_declContext *ctx) {
-  subroutine       & subrRef = Code.get_last_subroutine();
-  TypesMgr::TypeId        t1 = getTypeDecor(ctx->type());
-  std::size_t           size = Types.getSizeOfType(t1);
-  subrRef.add_var(ctx->ID()->getText(), size);
+  subroutine & subrRef = Code.get_last_subroutine();
+  TypesMgr::TypeId t1 = getTypeDecor(ctx->data());
+  std::size_t size = Types.getSizeOfType(t1);
+  for(unsigned int i = 0; i < ctx->ID().size(); ++i)
+    subrRef.add_var(ctx->ID(i)->getText(), size);
   DEBUG_EXIT();
 }
 

@@ -104,13 +104,15 @@ void SymbolsListener::enterVariable_decl(AslParser::Variable_declContext *ctx) {
   DEBUG_ENTER();
 }
 void SymbolsListener::exitVariable_decl(AslParser::Variable_declContext *ctx) {
-  std::string ident = ctx->ID()->getText();
-  if (Symbols.findInCurrentScope(ident)) {
-    Errors.declaredIdent(ctx->ID());
-  }
-  else {
-    TypesMgr::TypeId t1 = getTypeDecor(ctx->type());
-    Symbols.addLocalVar(ident, t1);
+  for(unsigned int i = 0; i < ctx->ID().size(); ++i){
+    std::string ident = ctx->ID(i)->getText();
+    if (Symbols.findInCurrentScope(ident)) {
+       Errors.declaredIdent(ctx->ID(i));
+    }
+    else {
+      TypesMgr::TypeId t1 = getTypeDecor(ctx->data());                
+      Symbols.addLocalVar(ident, t1);
+    }
   }
   DEBUG_EXIT();
 }

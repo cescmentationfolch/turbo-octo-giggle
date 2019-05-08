@@ -47,7 +47,7 @@ parameters
         
 parameter
         : ID ':' data
-        ;
+		;
 
 declarations
         : (variable_decl)*
@@ -56,16 +56,17 @@ declarations
 variable_decl
         : VAR ID (',' ID)* ':' data
         ;
-        
+
 data
         : type
-        : ARRAY '[' INTVAL ']' 'of' type
+		| ARRAY '[' INTVAL ']' 'of' type
+		;
 
 type    : INT
-        : FLOAT
-        : BOOL
-        : CHAR
-        ;
+        | FLOAT
+        | BOOL
+        | CHAR
+		;
 
 statements
         : (statement)*
@@ -92,8 +93,9 @@ statement
         ;
 
 elseStmt
-        : ELSE statements
-        
+		: ELSE statements
+		;
+
 // Grammar for left expressions (l-values in C++)
 left_expr
         : ident
@@ -110,7 +112,7 @@ expr    : ident '[' expr ']'                             # corchete
         | '(' expr ')'                                   # parenthesis
         | (INTVAL|FLOATVAL|TRUE|FALSE|CHARVAL)           # value
         | ident                                          # exprIdent
-        ;
+		;
 
 ident   : ID
         ;
@@ -120,11 +122,11 @@ ident   : ID
 //////////////////////////////////////////////////
 
 ASSIGN    : '=' ;
-NOT       : 'not'
-AND       : 'and'
-OR        : 'or'
+NOT       : 'not';
+AND       : 'and';
+OR        : 'or';
 EQUAL     : '==' ;
-NEQUAL    : '!='
+NEQUAL    : '!=';
 LT        : '<';
 GT        : '>';
 LE        : '<=';
@@ -132,7 +134,7 @@ GE        : '>=';
 PLUS      : '+' ;
 MUL       : '*';
 DIV       : '/';
-MOD       : '%'
+MOD       : '%';
 MINUS     : '-';
 VAR       : 'var';
 ARRAY     : 'array';
@@ -144,20 +146,20 @@ IF        : 'if' ;
 THEN      : 'then' ;
 ELSE      : 'else' ;
 ENDIF     : 'endif' ;
-WHILE     : 'while'
-DO        : 'do'
-ENDWHILE  : 'endwhile'
+WHILE     : 'while';
+DO        : 'do';
+ENDWHILE  : 'endwhile';
 FUNC      : 'func' ;
 ENDFUNC   : 'endfunc' ;
-RETURN    : 'return'
+RETURN    : 'return';
 READ      : 'read' ;
 WRITE     : 'write' ;
 ID        : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ;
 INTVAL    : ('0'..'9')+ ;
-FLOATVAL  : ('0'..'9')+ '.' ('0'..'9')+
-TRUE      : 'true'
-FALSE     : 'false'
-CHARVAL   : '\'' . '\''
+FLOATVAL  : ('0'..'9')+ '.' ('0'..'9')+;
+TRUE      : 'true';
+FALSE     : 'false';
+CHARVAL : '\'' . '\'';
 
 // Strings (in quotes) with escape sequences
 STRING    : '"' ( ESC_SEQ | ~('\\'|'"') )* '"' ;
