@@ -85,11 +85,32 @@ void SymbolsListener::exitFunction(AslParser::FunctionContext *ctx) {
     Errors.declaredIdent(ctx->ID());
   }
   else {
-    std::vector<TypesMgr::TypeId> lParamsTy;
-    TypesMgr::TypeId tRet = Types.createVoidTy();
+    size_t num_param = ((ctx->parameters())? ctx->parameters()->parameter().size() : 0);
+    std::vector<TypesMgr::TypeId> lParamsTy(num_param);
+    for (size_t i = 0; i < num_param; ++i) {
+      lParamsTy[i] = getTypeDecor(ctx->parameters()->parameter(i));
+    }
+    TypesMgr::TypeId tRet = ((ctx->type())? getTypeDecor(ctx->type()) : Types.createVoidTy());
     TypesMgr::TypeId tFunc = Types.createFunctionTy(lParamsTy, tRet);
     Symbols.addFunction(ident, tFunc);
+    putTypeDecor(ctx, tFunc);
   }
+  DEBUG_EXIT();
+}
+
+void SymbolsListener::enterParameter(AslParser::ParameterContext *ctx) {
+  DEBUG_ENTER();
+}
+
+void SymbolsListener::exitParameter(AslParser::ParameterContext *ctx) {
+  TypesMgr::TypeId t = getTypeDecor(ctx->data());
+  std::string ident = ctx->ID()->getText();
+  if (Symbols.findInCurrentScope(ident)) {
+    Errors.declaredIdent(ctx->ID());
+  } else {
+    Symbols.addParameter(ident, t);
+  }
+  putTypeDecor(ctx, t);
   DEBUG_EXIT();
 }
 
@@ -104,16 +125,33 @@ void SymbolsListener::enterVariable_decl(AslParser::Variable_declContext *ctx) {
   DEBUG_ENTER();
 }
 void SymbolsListener::exitVariable_decl(AslParser::Variable_declContext *ctx) {
+  TypesMgr::TypeId t1 = getTypeDecor(ctx->data());                
   for(unsigned int i = 0; i < ctx->ID().size(); ++i){
     std::string ident = ctx->ID(i)->getText();
     if (Symbols.findInCurrentScope(ident)) {
        Errors.declaredIdent(ctx->ID(i));
     }
     else {
-      TypesMgr::TypeId t1 = getTypeDecor(ctx->data());                
       Symbols.addLocalVar(ident, t1);
     }
   }
+  DEBUG_EXIT();
+}
+
+void SymbolsListener::enterData(AslParser::DataContext *ctx) {
+  DEBUG_ENTER();
+}
+
+void SymbolsListener::exitData(AslParser::DataContext *ctx) {
+  TypesMgr::TypeId t;
+  if (ctx->array()) {
+    unsigned int mida = stoi(ctx->array()->INTVAL()->getText());
+    TypesMgr::TypeId taux = getTypeDecor(ctx->array()->type());
+    t = Types.createArrayTy(mida, taux);
+  } else { 
+    t = getTypeDecor(ctx->type());
+  }
+  putTypeDecor(ctx,t);
   DEBUG_EXIT();
 }
 
@@ -121,10 +159,17 @@ void SymbolsListener::enterType(AslParser::TypeContext *ctx) {
   DEBUG_ENTER();
 }
 void SymbolsListener::exitType(AslParser::TypeContext *ctx) {
+  TypesMgr::TypeId t;
   if (ctx->INT()) {
-    TypesMgr::TypeId t = Types.createIntegerTy();
-    putTypeDecor(ctx, t);
+    t = Types.createIntegerTy();
+  } else if (ctx->FLOAT()) {
+    t = Types.createFloatTy();
+  } else if (ctx->BOOL()) {
+    t = Types.createBooleanTy();
+  } else {
+    t = Types.createCharacterTy();
   }
+  putTypeDecor(ctx, t);
   DEBUG_EXIT();
 }
 

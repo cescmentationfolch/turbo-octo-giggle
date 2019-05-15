@@ -38,7 +38,7 @@ program : function+ EOF
 
 // A function has a name, a list of parameters and a list of statements
 function
-        : FUNC ID '(' (parameters | ) ')' ( | (':' type)) declarations statements ENDFUNC
+        : FUNC ID '(' (parameters)? ')' (':' type)? declarations statements ENDFUNC
         ;
         
 parameters
@@ -58,9 +58,13 @@ variable_decl
         ;
 
 data
-        : type
-		| ARRAY '[' INTVAL ']' 'of' type
-		;
+        : type 
+        | array
+        ;
+
+array
+        : ARRAY '[' INTVAL ']' 'of' type  
+        ;
 
 type    : INT
         | FLOAT
@@ -89,7 +93,7 @@ statement
           // Write a string
         | WRITE STRING ';'                    # writeString
           //
-        | RETURN (expr | )                    # returnStmt
+        | RETURN (expr)? ';'                  # returnStmt
         ;
 
 elseStmt
