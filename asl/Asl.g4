@@ -85,7 +85,7 @@ statement
           // while statement
         | WHILE expr DO statements ENDWHILE            # whileStmt
           // A function/procedure call has a list of arguments in parenthesis (possibly empty)
-        | ident '(' ')' ';'                   # procCall
+        | ident '('(exprs)? ')' ';'                   # procCall
           // Read a variable
         | READ left_expr ';'                  # readStmt
           // Write an expression
@@ -111,12 +111,15 @@ expr    : ident '[' expr ']'                             # corchete
         | expr op=(MUL|DIV|MOD) expr                     # arithmetic
         | expr op=(PLUS|MINUS) expr                      # arithmetic
         | expr op=(EQUAL|NEQUAL|LT|GT|LE|GE) expr        # relational
-        | expr op=AND                                    # logical
-        | expr op=OR                                     # logical
+        | expr op=AND expr                               # logical
+        | expr op=OR  expr                               # logical
         | '(' expr ')'                                   # parenthesis
         | (INTVAL|FLOATVAL|TRUE|FALSE|CHARVAL)           # value
         | ident                                          # exprIdent
-		;
+        ;
+
+exprs   : expr (',' expr)*
+        ;
 
 ident   : ID
         ;

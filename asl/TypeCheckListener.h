@@ -77,11 +77,29 @@ public:
   void enterStatements(AslParser::StatementsContext *ctx);
   void exitStatements(AslParser::StatementsContext *ctx);
 
+  void enterCorchete(AslParser::CorcheteContext *ctx);
+  void exitCorchete(AslParser::CorcheteContext *ctx);
+
+  void enterUnary(AslParser::UnaryContext *ctx);
+  void exitUnary(AslParser::UnaryContext *ctx);
+
+  void enterLogical(AslParser::LogicalContext *ctx);
+  void exitLogical(AslParser::LogicalContext *ctx);
+
+  void enterParenthesis(AslParser::ParenthesisContext *ctx);
+  void exitParenthesis(AslParser::ParenthesisContext *ctx);
+
   void enterAssignStmt(AslParser::AssignStmtContext *ctx);
   void exitAssignStmt(AslParser::AssignStmtContext *ctx);
 
   void enterIfStmt(AslParser::IfStmtContext *ctx);
   void exitIfStmt(AslParser::IfStmtContext *ctx);
+
+  void enterWhileStmt(AslParser::WhileStmtContext *ctx);
+  void exitWhileStmt(AslParser::WhileStmtContext *ctx);
+
+  void enterReturnStmt(AslParser::ReturnStmtContext *ctx);
+  void exitReturnStmt(AslParser::ReturnStmtContext *ctx);
 
   void enterProcCall(AslParser::ProcCallContext *ctx);
   void exitProcCall(AslParser::ProcCallContext *ctx);
