@@ -258,10 +258,12 @@ void TypeCheckListener::exitFuncid(AslParser::FuncidContext *ctx) {
     std::vector<TypesMgr::TypeId> Params = Types.getFuncParamsTypes(t1);
     if ((ctx->exprs() and ctx->exprs()->expr().size() != Params.size()) or (not ctx->exprs() and Params.size()))
       Errors.numberOfParameters(ctx->ident());
-    for (size_t i = 0; i < Params.size(); ++i) {
-      TypesMgr::TypeId tp = getTypeDecor(ctx->exprs()->expr(i));
-      if ((not Types.isErrorTy(tp)) and (not Types.copyableTypes(Params[i], tp)))
-        Errors.incompatibleParameter(ctx->exprs()->expr(i), i+1, ctx);
+    else {
+      for (size_t i = 0; i < Params.size(); ++i) {
+        TypesMgr::TypeId tp = getTypeDecor(ctx->exprs()->expr(i));
+        if ((not Types.isErrorTy(tp)) and (not Types.copyableTypes(Params[i], tp)))
+          Errors.incompatibleParameter(ctx->exprs()->expr(i), i+1, ctx);
+      }
     }
     tr = Types.getFuncReturnType(t1);
     if (Types.isVoidTy(tr)) {
@@ -341,20 +343,17 @@ void TypeCheckListener::exitArithmetic(AslParser::ArithmeticContext *ctx) {
   TypesMgr::TypeId t1 = getTypeDecor(ctx->expr(0));
   TypesMgr::TypeId t2 = getTypeDecor(ctx->expr(1));
   TypesMgr::TypeId t; 
-  if (Types.isIntegerTy(t1) and Types.isIntegerTy(t2))
-    t = Types.createIntegerTy();
-  else if ((not Types.isErrorTy(t1)) and (not Types.isErrorTy(t2)))
+  if (Types.isFloatTy(t1) or Types.isFloatTy(t2))
     t = Types.createFloatTy();
   else 
-    t = Types.createErrorTy();
+    t = Types.createIntegerTy();
   if ((not ctx->MOD()) and (((not Types.isErrorTy(t1)) and (not Types.isNumericTy(t1))) or
       ((not Types.isErrorTy(t2)) and (not Types.isNumericTy(t2))))) {
     Errors.incompatibleOperator(ctx->op);
-    t = Types.createErrorTy();
   }
   if (ctx->MOD() and (not Types.isErrorTy(t1)) and (not Types.isErrorTy(t2)) and ((not Types.isIntegerTy(t1)) or (not Types.isIntegerTy(t2)))) {
     Errors.incompatibleOperator(ctx->op);
-    t = Types.createErrorTy();
+    t = Types.createIntegerTy();
   }
   putTypeDecor(ctx, t);
   putIsLValueDecor(ctx, false);
