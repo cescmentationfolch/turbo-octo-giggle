@@ -83,6 +83,8 @@ void SymbolsListener::exitFunction(AslParser::FunctionContext *ctx) {
   std::string ident = ctx->ID()->getText();
   if (Symbols.findInCurrentScope(ident)) {
     Errors.declaredIdent(ctx->ID());
+    TypesMgr::TypeId t = Types.createErrorTy();
+    putTypeDecor(ctx,t);
   }
   else {
     size_t num_param = ((ctx->parameters())? ctx->parameters()->parameter().size() : 0);

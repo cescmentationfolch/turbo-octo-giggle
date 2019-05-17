@@ -94,7 +94,7 @@ int main(int argc, const char* argv[]) {
   }
 
   // print the parse tree (for debugging purposes)
-  std::cout << tree->toStringTree(&parser) << std::endl;
+  // std::cout << tree->toStringTree(&parser) << std::endl;
 
   // create a walker that will traverse the tree and do several things,
   // like checking variable types or generating code.
@@ -120,7 +120,7 @@ int main(int argc, const char* argv[]) {
   walker.walk(&typecheck, tree);
 
   if (errors.getNumberOfSemanticErrors() > 0) {
-    std::cout << "There are semantic errors: no code generated." << std::endl;
+    //std::cout << "There are semantic errors: no code generated." << std::endl;
     return EXIT_FAILURE;
   }
 

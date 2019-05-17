@@ -102,12 +102,12 @@ elseStmt
 
 // Grammar for left expressions (l-values in C++)
 left_expr
-        : ident
+        : ident '[' expr ']'                            # corchete
+        | ident                                         # exprIdent
         ;
 
 // Grammar for expressions with boolean, relational and aritmetic operators
-expr    : ident '[' expr ']'                             # corchete
-        | op=(NOT|PLUS|MINUS) expr                       # unary
+expr    : op=(NOT|PLUS|MINUS) expr                       # unary
         | expr op=(MUL|DIV|MOD) expr                     # arithmetic
         | expr op=(PLUS|MINUS) expr                      # arithmetic
         | expr op=(EQUAL|NEQUAL|LT|GT|LE|GE) expr        # relational
@@ -115,7 +115,7 @@ expr    : ident '[' expr ']'                             # corchete
         | expr op=OR  expr                               # logical
         | '(' expr ')'                                   # parenthesis
         | (INTVAL|FLOATVAL|TRUE|FALSE|CHARVAL)           # value
-        | ident                                          # exprIdent
+        | left_expr                                      # left
         ;
 
 exprs   : expr (',' expr)*
@@ -161,11 +161,11 @@ ENDFUNC   : 'endfunc' ;
 RETURN    : 'return';
 READ      : 'read' ;
 WRITE     : 'write' ;
+TRUE      : 'true';
+FALSE     : 'false';
 ID        : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ;
 INTVAL    : ('0'..'9')+ ;
 FLOATVAL  : ('0'..'9')+ '.' ('0'..'9')+;
-TRUE      : 'true';
-FALSE     : 'false';
 CHARVAL : '\'' . '\'';
 
 // Strings (in quotes) with escape sequences

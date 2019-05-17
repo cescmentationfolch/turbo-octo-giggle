@@ -238,9 +238,9 @@ void CodeGenListener::enterLeft_expr(AslParser::Left_exprContext *ctx) {
   DEBUG_ENTER();
 }
 void CodeGenListener::exitLeft_expr(AslParser::Left_exprContext *ctx) {
-  putAddrDecor(ctx, getAddrDecor(ctx->ident()));
-  putOffsetDecor(ctx, getOffsetDecor(ctx->ident()));
-  putCodeDecor(ctx, getCodeDecor(ctx->ident()));
+  //putAddrDecor(ctx, getAddrDecor(ctx->ident()));
+  //putOffsetDecor(ctx, getOffsetDecor(ctx->ident()));
+  //putCodeDecor(ctx, getCodeDecor(ctx->ident()));
   DEBUG_ENTER();
 }
 
