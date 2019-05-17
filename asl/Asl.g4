@@ -170,7 +170,7 @@ FALSE     : 'false';
 ID        : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ;
 INTVAL    : ('0'..'9')+ ;
 FLOATVAL  : ('0'..'9')+ '.' ('0'..'9')+;
-CHARVAL : '\'' . '\'';
+CHARVAL : '\'' (.| '\\n' | '\\t' | '\\\'') '\'';
 
 // Strings (in quotes) with escape sequences
 STRING    : '"' ( ESC_SEQ | ~('\\'|'"') )* '"' ;

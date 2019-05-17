@@ -143,6 +143,7 @@ void CodeGenListener::enterIfStmt(AslParser::IfStmtContext *ctx) {
   DEBUG_ENTER();
 }
 void CodeGenListener::exitIfStmt(AslParser::IfStmtContext *ctx) {
+  // TODO else
   instructionList   code;
   std::string      addr1 = getAddrDecor(ctx->expr());
   instructionList  code1 = getCodeDecor(ctx->expr());
@@ -155,6 +156,8 @@ void CodeGenListener::exitIfStmt(AslParser::IfStmtContext *ctx) {
   DEBUG_EXIT();
 }
 
+// TODO While
+
 void CodeGenListener::enterProcCall(AslParser::ProcCallContext *ctx) {
   DEBUG_ENTER();
 }
@@ -166,6 +169,8 @@ void CodeGenListener::exitProcCall(AslParser::ProcCallContext *ctx) {
   putCodeDecor(ctx, code);
   DEBUG_EXIT();
 }
+
+// TODO Funcid
 
 void CodeGenListener::enterReadStmt(AslParser::ReadStmtContext *ctx) {
   DEBUG_ENTER();
@@ -238,6 +243,7 @@ void CodeGenListener::enterLeft_expr(AslParser::Left_exprContext *ctx) {
   DEBUG_ENTER();
 }
 void CodeGenListener::exitLeft_expr(AslParser::Left_exprContext *ctx) {
+  // TODO que flipes
   //putAddrDecor(ctx, getAddrDecor(ctx->ident()));
   //putOffsetDecor(ctx, getOffsetDecor(ctx->ident()));
   //putCodeDecor(ctx, getCodeDecor(ctx->ident()));
@@ -248,6 +254,7 @@ void CodeGenListener::enterArithmetic(AslParser::ArithmeticContext *ctx) {
   DEBUG_ENTER();
 }
 void CodeGenListener::exitArithmetic(AslParser::ArithmeticContext *ctx) {
+  // TODO totes les operacions (i floats)
   std::string     addr1 = getAddrDecor(ctx->expr(0));
   instructionList code1 = getCodeDecor(ctx->expr(0));
   std::string     addr2 = getAddrDecor(ctx->expr(1));
@@ -267,10 +274,15 @@ void CodeGenListener::exitArithmetic(AslParser::ArithmeticContext *ctx) {
   DEBUG_EXIT();
 }
 
+// TODO Logical
+//
+// TODO Unary
+
 void CodeGenListener::enterRelational(AslParser::RelationalContext *ctx) {
   DEBUG_ENTER();
 }
 void CodeGenListener::exitRelational(AslParser::RelationalContext *ctx) {
+  // TODO totes les operacions
   std::string     addr1 = getAddrDecor(ctx->expr(0));
   instructionList code1 = getCodeDecor(ctx->expr(0));
   std::string     addr2 = getAddrDecor(ctx->expr(1));
@@ -291,6 +303,7 @@ void CodeGenListener::enterValue(AslParser::ValueContext *ctx) {
   DEBUG_ENTER();
 }
 void CodeGenListener::exitValue(AslParser::ValueContext *ctx) {
+  // TODO mirar tipus
   instructionList code;
   std::string temp = "%"+codeCounters.newTEMP();
   code = instruction::ILOAD(temp, ctx->getText());
@@ -299,18 +312,6 @@ void CodeGenListener::exitValue(AslParser::ValueContext *ctx) {
   putCodeDecor(ctx, code);
   DEBUG_EXIT();
 }
-
-/*
-void CodeGenListener::enterExprIdent(AslParser::ExprIdentContext *ctx) {
-  DEBUG_ENTER();
-}
-void CodeGenListener::exitExprIdent(AslParser::ExprIdentContext *ctx) {
-  putAddrDecor(ctx, getAddrDecor(ctx->ident()));
-  putOffsetDecor(ctx, getOffsetDecor(ctx->ident()));
-  putCodeDecor(ctx, getCodeDecor(ctx->ident()));
-  DEBUG_EXIT();
-}
-*/
 
 void CodeGenListener::enterIdent(AslParser::IdentContext *ctx) {
   DEBUG_ENTER();
@@ -321,6 +322,8 @@ void CodeGenListener::exitIdent(AslParser::IdentContext *ctx) {
   putCodeDecor(ctx, instructionList());
   DEBUG_EXIT();
 }
+
+// TODO Arrayid
 
 // void CodeGenListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {
 //   DEBUG_ENTER();
