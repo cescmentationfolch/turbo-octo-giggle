@@ -203,6 +203,13 @@ void SymbolsListener::exitProcCall(AslParser::ProcCallContext *ctx) {
   DEBUG_EXIT();
 }
 
+void SymbolsListener::enterFuncid(AslParser::FuncidContext *ctx) {
+  DEBUG_ENTER();
+}
+void SymbolsListener::exitFuncid(AslParser::FuncidContext *ctx) {
+  DEBUG_EXIT();
+}
+
 void SymbolsListener::enterReadStmt(AslParser::ReadStmtContext *ctx) {
   DEBUG_ENTER();
 }
@@ -249,13 +256,6 @@ void SymbolsListener::enterValue(AslParser::ValueContext *ctx) {
   DEBUG_ENTER();
 }
 void SymbolsListener::exitValue(AslParser::ValueContext *ctx) {
-  DEBUG_EXIT();
-}
-
-void SymbolsListener::enterExprIdent(AslParser::ExprIdentContext *ctx) {
-  DEBUG_ENTER();
-}
-void SymbolsListener::exitExprIdent(AslParser::ExprIdentContext *ctx) {
   DEBUG_EXIT();
 }
 

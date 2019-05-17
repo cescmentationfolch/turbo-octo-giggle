@@ -102,8 +102,8 @@ elseStmt
 
 // Grammar for left expressions (l-values in C++)
 left_expr
-        : ident '[' expr ']'                            # corchete
-        | ident                                         # exprIdent
+        : arrayid
+        | ident                                         
         ;
 
 // Grammar for expressions with boolean, relational and aritmetic operators
@@ -116,9 +116,13 @@ expr    : op=(NOT|PLUS|MINUS) expr                       # unary
         | '(' expr ')'                                   # parenthesis
         | (INTVAL|FLOATVAL|TRUE|FALSE|CHARVAL)           # value
         | left_expr                                      # left
+        | ident '('(exprs)? ')'                          # funcid
         ;
 
 exprs   : expr (',' expr)*
+        ;
+
+arrayid : ident '[' expr ']'
         ;
 
 ident   : ID

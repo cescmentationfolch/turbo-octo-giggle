@@ -77,8 +77,8 @@ public:
   void enterStatements(AslParser::StatementsContext *ctx);
   void exitStatements(AslParser::StatementsContext *ctx);
 
-  void enterCorchete(AslParser::CorcheteContext *ctx);
-  void exitCorchete(AslParser::CorcheteContext *ctx);
+  void enterArrayid(AslParser::ArrayidContext *ctx);
+  void exitArrayid(AslParser::ArrayidContext *ctx);
 
   void enterUnary(AslParser::UnaryContext *ctx);
   void exitUnary(AslParser::UnaryContext *ctx);
@@ -104,6 +104,9 @@ public:
   void enterProcCall(AslParser::ProcCallContext *ctx);
   void exitProcCall(AslParser::ProcCallContext *ctx);
 
+  void enterFuncid(AslParser::FuncidContext *ctx);
+  void exitFuncid(AslParser::FuncidContext *ctx);
+
   void enterReadStmt(AslParser::ReadStmtContext *ctx);
   void exitReadStmt(AslParser::ReadStmtContext *ctx);
 
@@ -116,6 +119,9 @@ public:
   void enterLeft_expr(AslParser::Left_exprContext *ctx);
   void exitLeft_expr(AslParser::Left_exprContext *ctx);
 
+  void enterLeft(AslParser::LeftContext *ctx);
+  void exitLeft(AslParser::LeftContext *ctx);
+
   void enterArithmetic(AslParser::ArithmeticContext *ctx);
   void exitArithmetic(AslParser::ArithmeticContext *ctx);
 
@@ -124,9 +130,6 @@ public:
 
   void enterValue(AslParser::ValueContext *ctx);
   void exitValue(AslParser::ValueContext *ctx);
-
-  void enterExprIdent(AslParser::ExprIdentContext *ctx);
-  void exitExprIdent(AslParser::ExprIdentContext *ctx);
 
   void enterIdent(AslParser::IdentContext *ctx);
   void exitIdent(AslParser::IdentContext *ctx);

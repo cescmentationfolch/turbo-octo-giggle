@@ -300,6 +300,7 @@ void CodeGenListener::exitValue(AslParser::ValueContext *ctx) {
   DEBUG_EXIT();
 }
 
+/*
 void CodeGenListener::enterExprIdent(AslParser::ExprIdentContext *ctx) {
   DEBUG_ENTER();
 }
@@ -309,6 +310,7 @@ void CodeGenListener::exitExprIdent(AslParser::ExprIdentContext *ctx) {
   putCodeDecor(ctx, getCodeDecor(ctx->ident()));
   DEBUG_EXIT();
 }
+*/
 
 void CodeGenListener::enterIdent(AslParser::IdentContext *ctx) {
   DEBUG_ENTER();
