@@ -10,42 +10,71 @@ function f
   endvars
 
      %1 = v
-     c = %1
-     %2 = 'e'
-     writec %2
-     %2 = 'n'
-     writec %2
-     %2 = ' '
-     writec %2
-     %2 = 'f'
-     writec %2
-     %2 = '.'
-     writec %2
-     %2 = ' '
-     writec %2
-     %2 = 'c'
-     writec %2
-     %2 = ':'
-     writec %2
-     %2 = ' '
-     writec %2
-     %3 = 0
-     i = %3
+     %2 = 0
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 1
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 2
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 3
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 4
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 5
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 6
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 7
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 8
+     %3 = %1[%2]
+     c[%2] = %3
+     %2 = 9
+     %3 = %1[%2]
+     c[%2] = %3
+     %4 = 'e'
+     writec %4
+     %4 = 'n'
+     writec %4
+     %4 = ' '
+     writec %4
+     %4 = 'f'
+     writec %4
+     %4 = '.'
+     writec %4
+     %4 = ' '
+     writec %4
+     %4 = 'c'
+     writec %4
+     %4 = ':'
+     writec %4
+     %4 = ' '
+     writec %4
+     %5 = 0
+     i = %5
   label while1 :
-     %4 = 10
-     %5 = i < %4
-     ifFalse %5 goto endwhile1
-     %6 = c[i]
-     writei %6
-     %7 = ' '
-     writec %7
-     %8 = 1
-     %9 = i + %8
-     i = %9
+     %6 = 10
+     %7 = i < %6
+     ifFalse %7 goto endwhile1
+     %8 = c[i]
+     writei %8
+     %9 = ' '
+     writec %9
+     %10 = 1
+     %11 = i + %10
+     i = %11
      goto while1
   label endwhile1 :
-     %10 = '\n'
-     writec %10
+     %12 = '\n'
+     writec %12
      return
 endfunction
 
@@ -75,7 +104,36 @@ function g
      goto while1
   label endwhile1 :
      %8 = v
-     %8 = d
+     %9 = 0
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 1
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 2
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 3
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 4
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 5
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 6
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 7
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 8
+     %10 = d[%9]
+     %8[%9] = %10
+     %9 = 9
+     %10 = d[%9]
+     %8[%9] = %10
      return
 endfunction
 
@@ -101,243 +159,272 @@ function main
      i = %6
      goto while1
   label endwhile1 :
-     b = a
-     %7 = 'd'
-     writec %7
-     %7 = 'e'
-     writec %7
-     %7 = 's'
-     writec %7
-     %7 = 'p'
-     writec %7
-     %7 = 'r'
-     writec %7
-     %7 = 'e'
-     writec %7
-     %7 = 's'
-     writec %7
-     %7 = ' '
-     writec %7
-     %7 = 'd'
-     writec %7
-     %7 = 'e'
-     writec %7
-     %7 = ' '
-     writec %7
-     %7 = 'b'
-     writec %7
-     %7 = '='
-     writec %7
-     %7 = 'a'
-     writec %7
-     %7 = '.'
-     writec %7
-     %7 = ' '
-     writec %7
-     %7 = 'b'
-     writec %7
-     %7 = ':'
-     writec %7
-     %7 = ' '
-     writec %7
-     %8 = 0
-     i = %8
+     %7 = 0
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 1
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 2
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 3
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 4
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 5
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 6
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 7
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 8
+     %8 = a[%7]
+     b[%7] = %8
+     %7 = 9
+     %8 = a[%7]
+     b[%7] = %8
+     %9 = 'd'
+     writec %9
+     %9 = 'e'
+     writec %9
+     %9 = 's'
+     writec %9
+     %9 = 'p'
+     writec %9
+     %9 = 'r'
+     writec %9
+     %9 = 'e'
+     writec %9
+     %9 = 's'
+     writec %9
+     %9 = ' '
+     writec %9
+     %9 = 'd'
+     writec %9
+     %9 = 'e'
+     writec %9
+     %9 = ' '
+     writec %9
+     %9 = 'b'
+     writec %9
+     %9 = '='
+     writec %9
+     %9 = 'a'
+     writec %9
+     %9 = '.'
+     writec %9
+     %9 = ' '
+     writec %9
+     %9 = 'b'
+     writec %9
+     %9 = ':'
+     writec %9
+     %9 = ' '
+     writec %9
+     %10 = 0
+     i = %10
   label while2 :
-     %9 = 10
-     %10 = i < %9
-     ifFalse %10 goto endwhile2
-     %11 = b[i]
-     writei %11
-     %12 = ' '
-     writec %12
-     %13 = 1
-     %14 = i + %13
-     i = %14
+     %11 = 10
+     %12 = i < %11
+     ifFalse %12 goto endwhile2
+     %13 = b[i]
+     writei %13
+     %14 = ' '
+     writec %14
+     %15 = 1
+     %16 = i + %15
+     i = %16
      goto while2
   label endwhile2 :
-     %15 = '\n'
-     writec %15
-     %16 = 'd'
-     writec %16
-     %16 = 'e'
-     writec %16
-     %16 = 's'
-     writec %16
-     %16 = 'p'
-     writec %16
-     %16 = 'r'
-     writec %16
-     %16 = 'e'
-     writec %16
-     %16 = 's'
-     writec %16
-     %16 = ' '
-     writec %16
-     %16 = 'd'
-     writec %16
-     %16 = 'e'
-     writec %16
-     %16 = ' '
-     writec %16
-     %16 = 'b'
-     writec %16
-     %16 = '='
-     writec %16
-     %16 = 'a'
-     writec %16
-     %16 = '.'
-     writec %16
-     %16 = ' '
-     writec %16
-     %16 = 'a'
-     writec %16
-     %16 = ':'
-     writec %16
-     %16 = ' '
-     writec %16
-     %17 = 0
-     i = %17
+     %17 = '\n'
+     writec %17
+     %18 = 'd'
+     writec %18
+     %18 = 'e'
+     writec %18
+     %18 = 's'
+     writec %18
+     %18 = 'p'
+     writec %18
+     %18 = 'r'
+     writec %18
+     %18 = 'e'
+     writec %18
+     %18 = 's'
+     writec %18
+     %18 = ' '
+     writec %18
+     %18 = 'd'
+     writec %18
+     %18 = 'e'
+     writec %18
+     %18 = ' '
+     writec %18
+     %18 = 'b'
+     writec %18
+     %18 = '='
+     writec %18
+     %18 = 'a'
+     writec %18
+     %18 = '.'
+     writec %18
+     %18 = ' '
+     writec %18
+     %18 = 'a'
+     writec %18
+     %18 = ':'
+     writec %18
+     %18 = ' '
+     writec %18
+     %19 = 0
+     i = %19
   label while3 :
-     %18 = 10
-     %19 = i < %18
-     ifFalse %19 goto endwhile3
-     %20 = a[i]
-     writei %20
-     %21 = ' '
-     writec %21
-     %22 = 1
-     %23 = i + %22
-     i = %23
+     %20 = 10
+     %21 = i < %20
+     ifFalse %21 goto endwhile3
+     %22 = a[i]
+     writei %22
+     %23 = ' '
+     writec %23
+     %24 = 1
+     %25 = i + %24
+     i = %25
      goto while3
   label endwhile3 :
-     %24 = '\n'
-     writec %24
+     %26 = '\n'
+     writec %26
      pushparam 
-     %25 = &a
-     pushparam %25
+     %27 = &a
+     pushparam %27
      call f
      popparam 
      popparam 
-     %26 = 'd'
-     writec %26
-     %26 = 'e'
-     writec %26
-     %26 = 's'
-     writec %26
-     %26 = 'p'
-     writec %26
-     %26 = 'r'
-     writec %26
-     %26 = 'e'
-     writec %26
-     %26 = 's'
-     writec %26
-     %26 = ' '
-     writec %26
-     %26 = 'd'
-     writec %26
-     %26 = 'e'
-     writec %26
-     %26 = ' '
-     writec %26
-     %26 = 'f'
-     writec %26
-     %26 = '('
-     writec %26
-     %26 = 'a'
-     writec %26
-     %26 = ')'
-     writec %26
-     %26 = '.'
-     writec %26
-     %26 = ' '
-     writec %26
-     %26 = 'a'
-     writec %26
-     %26 = ':'
-     writec %26
-     %26 = ' '
-     writec %26
-     %27 = 0
-     i = %27
+     %28 = 'd'
+     writec %28
+     %28 = 'e'
+     writec %28
+     %28 = 's'
+     writec %28
+     %28 = 'p'
+     writec %28
+     %28 = 'r'
+     writec %28
+     %28 = 'e'
+     writec %28
+     %28 = 's'
+     writec %28
+     %28 = ' '
+     writec %28
+     %28 = 'd'
+     writec %28
+     %28 = 'e'
+     writec %28
+     %28 = ' '
+     writec %28
+     %28 = 'f'
+     writec %28
+     %28 = '('
+     writec %28
+     %28 = 'a'
+     writec %28
+     %28 = ')'
+     writec %28
+     %28 = '.'
+     writec %28
+     %28 = ' '
+     writec %28
+     %28 = 'a'
+     writec %28
+     %28 = ':'
+     writec %28
+     %28 = ' '
+     writec %28
+     %29 = 0
+     i = %29
   label while4 :
-     %28 = 10
-     %29 = i < %28
-     ifFalse %29 goto endwhile4
-     %30 = a[i]
-     writei %30
-     %31 = ' '
-     writec %31
-     %32 = 1
-     %33 = i + %32
-     i = %33
+     %30 = 10
+     %31 = i < %30
+     ifFalse %31 goto endwhile4
+     %32 = a[i]
+     writei %32
+     %33 = ' '
+     writec %33
+     %34 = 1
+     %35 = i + %34
+     i = %35
      goto while4
   label endwhile4 :
-     %34 = '\n'
-     writec %34
+     %36 = '\n'
+     writec %36
      pushparam 
-     %35 = &a
-     pushparam %35
+     %37 = &a
+     pushparam %37
      call g
      popparam 
      popparam 
-     %36 = 'd'
-     writec %36
-     %36 = 'e'
-     writec %36
-     %36 = 's'
-     writec %36
-     %36 = 'p'
-     writec %36
-     %36 = 'r'
-     writec %36
-     %36 = 'e'
-     writec %36
-     %36 = 's'
-     writec %36
-     %36 = ' '
-     writec %36
-     %36 = 'd'
-     writec %36
-     %36 = 'e'
-     writec %36
-     %36 = ' '
-     writec %36
-     %36 = 'g'
-     writec %36
-     %36 = '('
-     writec %36
-     %36 = 'a'
-     writec %36
-     %36 = ')'
-     writec %36
-     %36 = '.'
-     writec %36
-     %36 = ' '
-     writec %36
-     %36 = 'a'
-     writec %36
-     %36 = ':'
-     writec %36
-     %36 = ' '
-     writec %36
-     %37 = 0
-     i = %37
+     %38 = 'd'
+     writec %38
+     %38 = 'e'
+     writec %38
+     %38 = 's'
+     writec %38
+     %38 = 'p'
+     writec %38
+     %38 = 'r'
+     writec %38
+     %38 = 'e'
+     writec %38
+     %38 = 's'
+     writec %38
+     %38 = ' '
+     writec %38
+     %38 = 'd'
+     writec %38
+     %38 = 'e'
+     writec %38
+     %38 = ' '
+     writec %38
+     %38 = 'g'
+     writec %38
+     %38 = '('
+     writec %38
+     %38 = 'a'
+     writec %38
+     %38 = ')'
+     writec %38
+     %38 = '.'
+     writec %38
+     %38 = ' '
+     writec %38
+     %38 = 'a'
+     writec %38
+     %38 = ':'
+     writec %38
+     %38 = ' '
+     writec %38
+     %39 = 0
+     i = %39
   label while5 :
-     %38 = 10
-     %39 = i < %38
-     ifFalse %39 goto endwhile5
-     %40 = a[i]
-     writei %40
-     %41 = ' '
-     writec %41
-     %42 = 1
-     %43 = i + %42
-     i = %43
+     %40 = 10
+     %41 = i < %40
+     ifFalse %41 goto endwhile5
+     %42 = a[i]
+     writei %42
+     %43 = ' '
+     writec %43
+     %44 = 1
+     %45 = i + %44
+     i = %45
      goto while5
   label endwhile5 :
-     %44 = '\n'
-     writec %44
+     %46 = '\n'
+     writec %46
      return
 endfunction
 
