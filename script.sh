@@ -9,9 +9,5 @@ do
     echo `diff out $error`
     rm out
     echo ""
-  else 
-    echo ${file}
-    ./asl/asl < $file
-    echo ""
   fi
 done;

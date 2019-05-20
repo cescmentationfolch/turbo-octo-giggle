@@ -166,6 +166,7 @@ void TypeCheckListener::enterParenthesis(AslParser::ParenthesisContext *ctx) {
   DEBUG_ENTER();
 }
 void TypeCheckListener::exitParenthesis(AslParser::ParenthesisContext *ctx) {
+  putTypeDecor(ctx, getTypeDecor(ctx->expr()));
   DEBUG_EXIT();
 }
 
@@ -325,13 +326,24 @@ void TypeCheckListener::exitLeft_expr(AslParser::Left_exprContext *ctx) {
   DEBUG_EXIT();
 }
 
-void TypeCheckListener::enterLeft(AslParser::LeftContext *ctx) {
+void TypeCheckListener::enterIdentExpr(AslParser::IdentExprContext *ctx) {
   DEBUG_ENTER();
 }
-void TypeCheckListener::exitLeft(AslParser::LeftContext *ctx) {
-  TypesMgr::TypeId t1 = getTypeDecor(ctx->left_expr());
+void TypeCheckListener::exitIdentExpr(AslParser::IdentExprContext *ctx) {
+  TypesMgr::TypeId t1 = getTypeDecor(ctx->ident());
   putTypeDecor(ctx, t1);
-  bool b = getIsLValueDecor(ctx->left_expr());
+  bool b = getIsLValueDecor(ctx->ident());
+  putIsLValueDecor(ctx, b);
+  DEBUG_EXIT();
+}
+
+void TypeCheckListener::enterArrayExpr(AslParser::ArrayExprContext *ctx) {
+  DEBUG_ENTER();
+}
+void TypeCheckListener::exitArrayExpr(AslParser::ArrayExprContext *ctx) {
+  TypesMgr::TypeId t1 = getTypeDecor(ctx->arrayid());
+  putTypeDecor(ctx, t1);
+  bool b = getIsLValueDecor(ctx->arrayid());
   putIsLValueDecor(ctx, b);
   DEBUG_EXIT();
 }

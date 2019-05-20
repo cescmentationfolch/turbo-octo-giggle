@@ -115,7 +115,8 @@ expr    : op=(NOT|PLUS|MINUS) expr                       # unary
         | expr op=OR  expr                               # logical
         | '(' expr ')'                                   # parenthesis
         | (INTVAL|FLOATVAL|TRUE|FALSE|CHARVAL)           # value
-        | left_expr                                      # left
+        | ident                                          # identExpr
+        | arrayid                                        # arrayExpr
         | ident '('(exprs)? ')'                          # funcid
         ;
 

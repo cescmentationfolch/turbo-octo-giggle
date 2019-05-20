@@ -71,6 +71,15 @@ public:
   void enterDeclarations(AslParser::DeclarationsContext *ctx);
   void exitDeclarations(AslParser::DeclarationsContext *ctx);
 
+  void enterReturnStmt(AslParser::ReturnStmtContext *ctx);
+  void exitReturnStmt(AslParser::ReturnStmtContext *ctx);
+
+  void enterParameter(AslParser::ParameterContext *ctx);
+  void exitParameter(AslParser::ParameterContext *ctx);
+
+  void enterParenthesis(AslParser::ParenthesisContext *ctx);
+  void exitParenthesis(AslParser::ParenthesisContext *ctx);
+
   void enterVariable_decl(AslParser::Variable_declContext *ctx);
   void exitVariable_decl(AslParser::Variable_declContext *ctx);
 
@@ -86,8 +95,14 @@ public:
   void enterIfStmt(AslParser::IfStmtContext *ctx);
   void exitIfStmt(AslParser::IfStmtContext *ctx);
 
+  void enterWhileStmt(AslParser::WhileStmtContext *ctx);
+  void exitWhileStmt(AslParser::WhileStmtContext *ctx);
+
   void enterProcCall(AslParser::ProcCallContext *ctx);
   void exitProcCall(AslParser::ProcCallContext *ctx);
+
+  void enterFuncid(AslParser::FuncidContext *ctx);
+  void exitFuncid(AslParser::FuncidContext *ctx);
 
   void enterReadStmt(AslParser::ReadStmtContext *ctx);
   void exitReadStmt(AslParser::ReadStmtContext *ctx);
@@ -101,8 +116,20 @@ public:
   void enterLeft_expr(AslParser::Left_exprContext *ctx);
   void exitLeft_expr(AslParser::Left_exprContext *ctx);
 
+  void enterIdentExpr(AslParser::IdentExprContext *ctx);
+  void exitIdentExpr(AslParser::IdentExprContext *ctx);
+
+  void enterArrayExpr(AslParser::ArrayExprContext *ctx);
+  void exitArrayExpr(AslParser::ArrayExprContext *ctx);
+
   void enterArithmetic(AslParser::ArithmeticContext *ctx);
   void exitArithmetic(AslParser::ArithmeticContext *ctx);
+
+  void enterLogical(AslParser::LogicalContext *ctx);
+  void exitLogical(AslParser::LogicalContext *ctx);
+
+  void enterUnary(AslParser::UnaryContext *ctx);
+  void exitUnary(AslParser::UnaryContext *ctx);
 
   void enterRelational(AslParser::RelationalContext *ctx);
   void exitRelational(AslParser::RelationalContext *ctx);
