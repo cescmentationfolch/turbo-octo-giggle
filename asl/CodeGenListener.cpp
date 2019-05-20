@@ -164,6 +164,14 @@ void CodeGenListener::exitStatements(AslParser::StatementsContext *ctx) {
   DEBUG_EXIT();
 }
 
+void CodeGenListener::enterStatement(AslParser::StatementContext *ctx) {
+  DEBUG_ENTER();
+}
+void CodeGenListener::exitStatement(AslParser::StatementContext *ctx) {
+  codeCounters.resetTEMP();
+  DEBUG_EXIT();
+}
+
 void CodeGenListener::enterAssignStmt(AslParser::AssignStmtContext *ctx) {
   DEBUG_ENTER();
 }

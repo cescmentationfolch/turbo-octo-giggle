@@ -89,6 +89,9 @@ public:
   void enterStatements(AslParser::StatementsContext *ctx);
   void exitStatements(AslParser::StatementsContext *ctx);
 
+  void enterStatement(AslParser::StatementContext *ctx);
+  void exitStatement(AslParser::StatementContext *ctx);
+
   void enterAssignStmt(AslParser::AssignStmtContext *ctx);
   void exitAssignStmt(AslParser::AssignStmtContext *ctx);
 
